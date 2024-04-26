@@ -291,6 +291,15 @@ ul {
   margin: 0 5px;
 }
 
+.pagination button {
+  transition: background-color 0.4s;
+}
+
+.pagination button.active {
+  transition: background-color 0.4s;
+  background-color: #23707e;
+}
+
 .modal {
   position: fixed;
   top: 50%;

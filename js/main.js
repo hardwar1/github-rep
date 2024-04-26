@@ -103,7 +103,7 @@ function showButtons(currentPage) {
   const paginationButtons = pagination.querySelectorAll('button');
   const paginationSpans = pagination.querySelectorAll('span');
   let length = paginationButtons.length
-
+  console.log(currentPage);
   const lastPage = Math.ceil(reposLength() / perPage())
 
   for (let i = 0; i < length; i++) {
@@ -148,6 +148,15 @@ function showButtons(currentPage) {
     let count = 0
     if (currentPage === 1 || currentPage === 2) count = 1
     paginationButtons[6].innerHTML = currentPage + 2 + count
+  }
+
+  for (const btn of paginationButtons) {
+    btn.classList.remove('active')
+
+    console.log(+btn.textContent.trim());
+    if(+btn.textContent.trim() === currentPage) {
+      btn.classList.add('active')
+    }
   }
 
   paginationSpans[0].style.display = currentPage <= 5 ? 'none' : 'inline-block'
