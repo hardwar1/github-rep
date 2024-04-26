@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Microsoft repositories</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="./js/knockout.js"></script>
+  <script defer src="./js/main.js"></script>
+</head>
+
+<body>
+  <section class="main">
+    <div class="container">
+      <h1 class="main__title">Данные из Microsoft GitAPI:</h1>
+
+      <div class="show-count">
+        Показывать по:
+        <ul class="show-count__list">
+          <li class="show-count__item">
+            <button class="btn">
+              10
+            </button>
+          </li>
+          <li class="show-count__item">
+            <button class="btn">
+              50
+            </button>
+          </li>
+          <li class="show-count__item">
+            <button class="btn">
+              100
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="loading">
+        Загрузка
+      </div>
+      <div class="error"></div>
+
+      <!-- ko if: items().length > 0 -->
+      <div class="table">
+        <div class="table__tbody">
+          <div class="table__row">
+            <span class="table__th">Наименование</span>
+            <span class="table__th">Язык</span>
+            <span class="table__th">Дата/время последнего push</span>
+            <span class="table__th">Архивный</span>
+            <span class="table__th">Сcылка</span>
+          </div>
+
+          <div data-bind="foreach: items">
+            <!-- <tr class="table__row"> -->
+            <div class="table__row">
+              <span class="table__td" data-bind="text: name"></span>
+              <span class="table__td" data-bind="text: language "></span>
+              <span class="table__td" data-bind="text: dateShow(pushed_at)"></span>
+              <span class="table__td" data-bind="text: archived === true ? 'Да' : 'Нет' "></span>
+              <a class="table__td table__td--link" data-bind="attr: { href: clone_url}" class="table__td"
+                data-bind="text: name" target="_blank">
+                <svg width="40px" height="40px" viewBox="0 0 1024 1024" class="icon" version="1.1"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M810.666667 277.333333h-64c-117.333333 0-213.333333 96-213.333334 213.333334s96 213.333333 213.333334 213.333333h64c117.333333 0 213.333333-96 213.333333-213.333333s-96-213.333333-213.333333-213.333334z m0 341.333334h-64c-70.4 0-128-57.6-128-128s57.6-128 128-128h64c70.4 0 128 57.6 128 128s-57.6 128-128 128zM277.333333 277.333333h-64C96 277.333333 0 373.333333 0 490.666667s96 213.333333 213.333333 213.333333h64c117.333333 0 213.333333-96 213.333334-213.333333s-96-213.333333-213.333334-213.333334z m0 341.333334h-64c-70.4 0-128-57.6-128-128s57.6-128 128-128h64c70.4 0 128 57.6 128 128s-57.6 128-128 128z" />
+                  <path
+                    d="M704 448H320c-23.466667 0-42.666667 19.2-42.666667 42.666667s19.2 42.666667 42.666667 42.666666h384c23.466667 0 42.666667-19.2 42.666667-42.666666s-19.2-42.666667-42.666667-42.666667z" />
+                </svg>
+              </a>
+            </div>
+            <!-- </tr> -->
+          </div>
+        </div>
+      </div>
+      <!-- /ko -->
+      <div class="pagination"></div>
+
+    </div>
+  </section>
+
+  <section class="modal">
+    <div class="modal__inner">
+      <span class="modal__overlay"></span>
+
+      <div class="modal__body">
+        <button class="modal__close-btn" aria-label="закрыть"></button>
+
+        <h2 class="modal__h2">Последние issue</h2>
+        <div>
+          <!-- ko if: issue().length === 0 -->
+          <div class="modal__none-message">
+            У этого репозитория нет issue 
+          </div>
+          <!-- /ko -->
+
+          <!-- ko if: issue().length > 0 -->
+          <div class="table table--issue">
+            <div class="table__tbody">
+
+              <div class="table__row">
+                <span class="table__th">Дата</span>
+                <span class="table__th">Заголовок</span>
+                <span class="table__th">Текст</span>
+              </div>
+
+              <div data-bind="foreach: issue">
+                <!-- <tr class="table__row"> -->
+                <div class="table__row">
+                  <span class="table__td" data-bind="text: dateShowIssue(created_at)"></span>
+                  <span class="table__td" data-bind="text: title"></span>
+                  <pre class="table__td table__td--pre" data-bind="text: body"></pre>
+                </div>
+                <!-- </tr> -->
+              </div>
+            </div>
+          </div>
+          <!-- /ko -->
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
