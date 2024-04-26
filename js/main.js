@@ -177,16 +177,19 @@ function showButtons(currentPage) {
   }
 })()
 
+function add0(num){
+  return String(num).padStart(2, '0')
+}
 
 function dateShow(date) {
   const date1 = new Date(date)
-  return `${date1.getDate()}.${date1.getMonth() + 1}.${date1.getFullYear()} ${date1.getHours()}:${date1.getMinutes()}`
+  return `${add0(date1.getDate())}.${add0(date1.getMonth() + 1)}.${date1.getFullYear()} ${add0(date1.getHours())}:${add0(date1.getMinutes())}`
 }
 
 function dateShowIssue(date) {
   const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
   const date1 = new Date(date)
-  return `${date1.getHours()}:${date1.getMinutes()} ${date1.getDate()}.${months[date1.getMonth()]}.${date1.getFullYear()}`
+  return `${add0(date1.getHours())}:${add0(date1.getMinutes())} ${add0(date1.getDate())}.${months[date1.getMonth()]}.${date1.getFullYear()}`
 }
 
 
