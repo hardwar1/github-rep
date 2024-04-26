@@ -86,7 +86,7 @@ const updatePagination = ko.computed(() => {
 
     button.style.display = 'none';
     button.addEventListener('click', function () {
-      getRepositories(+this.textContent.trim());
+      getRepositories(+this.textContent.trim(), perPage());
       showButtons(+this.textContent.trim());
     });
     pagination.appendChild(button);
@@ -95,7 +95,7 @@ const updatePagination = ko.computed(() => {
   showButtons(1)
 });
 
-getRepositories(perPage());
+getRepositories(1, perPage());
 
 
 function showButtons(currentPage) {
